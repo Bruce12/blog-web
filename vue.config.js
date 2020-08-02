@@ -42,8 +42,8 @@ module.exports = {
       // change xxx-api/login => /mock-api/v1/login
       // detail: https://cli.vuejs.org/config/#devserver-proxy
       '/api': {
-        target: `http://127.0.0.1:7001`,
-        // target: ``,
+        // target: `http://47.95.224.130:7001`,
+        target: `http://127.0.0.1:7004`,
         router: function(req) {
           // let url = req.url.replace(/\/$/, '')
           // url = [url, req.method].join(':')
@@ -84,7 +84,8 @@ module.exports = {
     'style-resources-loader': {
       preProcessor: 'less',
       patterns: [
-        path.resolve(__dirname, 'src/styles/_variables.less')
+        path.resolve(__dirname, 'src/styles/_variables.less'),
+        path.resolve(__dirname, 'src/styles/_mixins.less')
       ]
     }
   },

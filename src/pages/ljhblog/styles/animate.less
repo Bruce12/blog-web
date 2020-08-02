@@ -1,0 +1,25 @@
+.bounceIn {
+  animation-name: bounceIn;
+}
+.animated {
+  animation-duration: .5s;
+  animation-fill-mode: both;
+  transform-origin: center;
+}
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

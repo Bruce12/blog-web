@@ -1,44 +1,64 @@
 import Vue from 'vue'
 import Router, { RouteConfig } from 'vue-router'
 import Layout from '../layout/index.vue'
+import rllRouter from './modules/rll'
+import ljhRouter from './modules/ljh'
 
 /* Layout */
 // import Layout from '@/layout/index.vue'
 Vue.use(Router)
 export const constantRoutes: RouteConfig[] = [
   {
+    path: '/redirect',
+    component: Layout,
+    meta: { hidden: true },
+    children: [
+      {
+        path: '/redirect/:path*',
+        component: () => import(/* webpackChunkName: "base_group" */ '../views/redirect/index.vue')
+      }
+    ]
+  },
+  {
     path: '/',
     component: Layout,
-    redirect: '/index',
+    redirect: '/dashboard',
     children: [{
-      path: '/index',
+      path: '/dashboard',
       component: () => import(/* webpackChunkName: "vender" */'../views/index/index.vue'),
-      name: 'index',
+      name: 'dashboard',
       meta: {
-        title: '首页'
+        title: 'Index',
+        icon: 'dashboard'
       }
     }]
   },
   {
     path: '/404',
-    component: () => import(/* webpackChunkName: "vender" */'../views/error_page/index.vue'),
+    component: () => import(/* webpackChunkName: "vender" */'../views/error_page/404.vue'),
     meta: {
       hidden: true
-    }
-  },
-  {
-    path: '/study_factory',
-    component: () => import(/* webpackChunkName: "vender" */'../views/study_factory/index.vue'),
-    meta: {
-      title: ''
     }
   },
   {
     path: '/login',
     component: () => import(/* webpackChunkName: "vender" */'../views/login/index.vue'),
     meta: {
-
+      title: '登录',
+      hidden: true
     }
+  }
+]
+
+// 需要加载的路由
+
+export const asyncRoutes: RouteConfig[] = [
+  rllRouter,
+  ljhRouter,
+  {
+    path: '*',
+    redirect: '/404',
+    meta: { hidden: true }
   }
 ]
 

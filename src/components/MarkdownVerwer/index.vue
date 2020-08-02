@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width: 100%;hegiht: 100%">
     <Viewer
       v-if="value"
       :initial-value="value"
@@ -26,7 +26,6 @@ export default class extends Vue {
   private value: string = this.initialValue
   @Watch('initialValue')
   private onValueChange(value: string) {
-    console.log('值改变了', value)
     this.value = value
   }
 }

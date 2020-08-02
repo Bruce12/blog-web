@@ -2,7 +2,7 @@ import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-dec
 import { RouteConfig } from 'vue-router'
 import { constantRoutes } from '@/pages/admin/router'
 import Layout from '@/pages/admin/layout/index.vue'
-import asyncRoutes from '@/pages/admin/router/routes'
+// import asyncRoutes from '@/pages/admin/router/routes'
 import store from '@/store'
 import { IRouter } from '@/global'
 
@@ -42,12 +42,13 @@ class Permission extends VuexModule implements IPermissionState {
    public inited: boolean = false
    @Mutation
    private SET_ROUTES(routes: RouteConfig[]) {
+     console.log('routes', routes)
      this.routes = constantRoutes.concat(routes)
      this.inited = true
    }
    @Action
    public getRouters() {
-     this.SET_ROUTES(filterRoutes(asyncRoutes))
+     //  this.SET_ROUTES(filterRoutes(asyncRoutes))
    }
 }
 export const PermissionModule = getModule(Permission)

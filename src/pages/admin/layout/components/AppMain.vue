@@ -4,33 +4,54 @@
       name="fade-transform"
       mode="out-in"
     >
-      <keep-alive>
-        <router-view />
+      <keep-alive :include="cachedViews">
+        <router-view :key="key" />
       </keep-alive>
     </transition>
   </section>
 </template>
+
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
+import { TagsViewModule } from '@/pages/admin/store/modules/tags-view'
 
 @Component({
   name: 'AppMain'
 })
 export default class extends Vue {
-  created() {
+  get cachedViews() {
+    return TagsViewModule.cachedViews
+  }
 
+  get key() {
+    return this.$route.path
   }
 }
-
 </script>
-<style lang="less" scoped>
+
+<style lang="scss" scoped>
 .app-main {
+  /* 50= navbar  50  */
   min-height: calc(100vh - 50px);
+  width: 100%;
   position: relative;
-  max-width: 1000px;
-  margin: 0 auto;
-  margin-top: 70px;
-  padding: 10px;
-  background: #fff;
+  overflow: hidden;
+}
+
+.fixed-header+.app-main {
+  padding-top: 50px;
+  height: 100vh;
+  overflow: auto;
+}
+
+.hasTagsView {
+  .app-main {
+    /* 84 = navbar + tags-view = 50 + 34 */
+    min-height: calc(100vh - 84px);
+  }
+
+  .fixed-header+.app-main {
+    padding-top: 84px;
+  }
 }
 </style>

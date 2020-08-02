@@ -2,7 +2,7 @@ import router from './router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { Route } from 'vue-router'
-import { PermissionModule } from '@/store/modules/permission'
+import { PermissionModule } from './store/modules/permission'
 
 NProgress.configure({ showSpinner: true })
 
@@ -11,7 +11,7 @@ router.beforeEach(async(to: Route, _: Route, next: any) => {
   NProgress.start()
   if (!PermissionModule.inited) {
     // 初始化路由
-    PermissionModule.getRouters()
+    PermissionModule.GenerateRoutes()
     router.addRoutes(PermissionModule.routes)
     next({ ...to, replace: true })
   } else {

@@ -1,18 +1,31 @@
-import Vue, { DirectiveOptions } from 'vue'
-
+import Vue from 'vue'
 import 'normalize.css'
-import elementUi from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-
 import './styles/index.less'
+import i18n from './lang'
+import elementUi from 'element-ui'
+import { AppModule } from './store/modules/app'
+import store from './store'
+import SvgIcon from 'vue-svgicon'
+import '@/utils/error-log'
+import '@/icons/components'
 // import * as filters from '@/filters'
 import router from './router'
 // import * as directives from '@/directives'
 import App from './App.vue'
 import './permission'
 // import * as directives from '@/directives'
-Vue.use(elementUi)
 
+Vue.use(SvgIcon, {
+  tagName: 'svg-icon',
+  defaultWidth: '1em',
+  defaultHeight: '1em'
+})
+
+Vue.use(elementUi, {
+  size: AppModule.size, // Set element-ui default size
+  i18n: (key: string, value: string) => i18n.t(key, value)
+})
 // Vue.use(Button)
 // Vue.use(Form)
 // Vue.use(FormItem)
@@ -37,5 +50,7 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  i18n,
+  store,
   render: (h) => h(App)
 }).$mount('#app')

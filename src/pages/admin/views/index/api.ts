@@ -1,6 +1,15 @@
-import http from '@/utils/http'
+import http from '../../utils/request'
+import Ajax from 'Ajax'
+export interface IEssayParam {
+  title: string
+  type: string
+  content: string
+}
 
-export const getList = () => http({
+export const getList = (params?: any) => http<Ajax.IData<any[]>>({
   url: '/api/v2/essay',
-  method: 'get'
+  method: 'get',
+  params: {
+    ...params
+  }
 })
